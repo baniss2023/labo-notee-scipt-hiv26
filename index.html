@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Labo intégrateur PowerShell sur une seule machine virtuelle — version étudiante</title>
+<link href="assets/style.css" rel="stylesheet"/>
+<link href="assets/style_print.css" media="print" rel="stylesheet"/>
+<link href="assets/unified_style.css" rel="stylesheet"/>
+<script defer="" src="assets/script.js"></script>
+<script defer="" src="assets/unified_script.js"></script>
+</head>
+<body id="top">
+<a aria-label="Retour en haut" class="back-to-top" href="#top">↑</a>
+<main class="document">
+<header class="document-header">
+<section aria-label="En-tête du cours" class="course-banner">
+<div class="banner-left">
+<div class="banner-photo-wrap"><img alt="Anis Ghaieb" class="banner-photo" src="img/anis.png"/></div>
+<div class="banner-left-info"><p class="banner-name">Anis Ghaieb</p><p class="banner-email">baniss2002@gmail.com</p></div>
+</div>
+<div class="banner-center">
+<p class="banner-course"><span class="banner-course-line">AUTOMATISATION ET SCRIPTS</span><span class="banner-course-line">LABO INTÉGRATEUR SUR UNE VM</span></p>
+</div>
+<div class="banner-right">
+<img alt="Collège Universel" class="banner-logo" src="img/college.png"/>
+<p class="banner-college"><span class="banner-college-main">Collège Universel</span><span class="banner-college-sub">Campus Montréal</span></p>
+</div>
+</section>
+<section aria-label="Équipe" class="team-panel">
+<div class="team-panel-head"><h2 class="team-panel-title">Équipe (3 maximum)</h2></div>
+<div class="team-grid">
+<label class="team-field" for="teamMember1"><span class="team-label">Nom1 :</span><input autocomplete="off" class="team-member-input" id="teamMember1" placeholder="Nom de l’étudiant 1" type="text"/></label>
+<label class="team-field" for="teamMember2"><span class="team-label">Nom2 :</span><input autocomplete="off" class="team-member-input" id="teamMember2" placeholder="Nom de l’étudiant 2" type="text"/></label>
+<label class="team-field" for="teamMember3"><span class="team-label">Nom3 :</span><input autocomplete="off" class="team-member-input" id="teamMember3" placeholder="Nom de l’étudiant 3" type="text"/></label>
+<label class="team-field" for="teamMember4"><span class="team-label">Nom4 :</span><input autocomplete="off" class="team-member-input" id="teamMember4" placeholder="Nom de l’étudiant 4 (optionnel)" type="text"/></label></div>
+</section>
+<div aria-hidden="true" class="team-print-card" id="teamPrint"></div>
+<div class="document-hero">
+<figure class="content-figure hero-figure"><img alt="Illustration du chapitre" class="content-image hero-image" src="img/chap.png"/></figure>
+<p class="document-kicker">PowerShell — progressif, guidé puis autonome</p>
+<h1 class="document-title">Labo intégrateur PowerShell sur une seule machine virtuelle</h1>
+<p class="document-intro">Dans ce labo, toute l’activité se fait sur <strong>une seule machine virtuelle Windows</strong>. Les tâches sont conçues pour être <strong>réalisables, sûres et progressives</strong>. Les <strong>parties 1 à 4</strong> représentent <strong>60 % de la note</strong>, la <strong>partie 5</strong> représente <strong>20 %</strong>, la <strong>partie 6</strong> représente <strong>10 %</strong> et le <strong>QCM final</strong> représente <strong>10 %</strong>.</p>
+</div>
+<section aria-label="Vue d’ensemble du labo" class="document-overview">
+<div class="overview-panel">
+<h2 class="overview-title">Table des matières</h2>
+<nav aria-label="Table des matières du labo" class="toc-nav">
+<ul class="toc-list">
+<li class="toc-item toc-level-1"><a class="toc-link" href="#partie-1">Partie 1 — Démarrage, sécurité et préparation du labo</a></li>
+<li class="toc-item toc-level-1"><a class="toc-link" href="#partie-2">Partie 2 — Bloc guidé : données du labo et documentation de départ</a></li>
+<li class="toc-item toc-level-1"><a class="toc-link" href="#partie-3">Partie 3 — Bloc guidé : création locale des utilisateurs et groupes</a></li>
+<li class="toc-item toc-level-1"><a class="toc-link" href="#partie-4">Partie 4 — Bloc guidé : automatisation observable et diagnostic local</a></li>
+<li class="toc-item toc-level-1"><a class="toc-link" href="#partie-5">Partie 5 — Tâches de recherche (20 %)</a></li>
+<li class="toc-item toc-level-1"><a class="toc-link" href="#partie-6">Partie 6 — Documentation et bilan (10 %)</a></li>
+<li class="toc-item toc-level-1"><a class="toc-link" href="#partie-qcm">QCM de validation (10 %)</a></li>
+<li class="toc-item toc-level-1"><a class="toc-link" href="#grille-evaluation">Grille d’évaluation</a></li><li class="toc-item toc-level-1 toc-item-export"><a class="toc-link" href="#export">Exportation en PDF</a></li>
+</ul>
+</nav>
+</div>
+<div class="overview-panel">
+<h2 class="overview-title">Objectifs du labo</h2>
+<ul class="goal-list">
+<li>Préparer un environnement de travail sûr dans un dossier unique.</li>
+<li>Créer simplement des groupes et des utilisateurs locaux à partir d’un fichier CSV.</li>
+<li>Observer une vraie tâche d’automatisation pendant que le script tourne et capturer le résultat.</li>
+<li>Produire un diagnostic local exploitable sur la même machine virtuelle.</li>
+<li>Réaliser ensuite des tâches autonomes déjà basées sur des manipulations pratiquées en classe.</li>
+<li>Documenter clairement le travail réalisé et répondre à un QCM final.</li>
+</ul>
+</div>
+</section>
+</header>
+<section class="part" id="partie-1">
+<div class="part-header"><h2 class="part-title">Partie 1 — Démarrage, sécurité et préparation du labo (60 % avec les parties 2 à 4)</h2></div>
+<div class="part-body">
+<section class="section-block line-section">
+<h3 class="section-title" id="p1-s1">Contexte et règles</h3>
+<div class="section-body">
+<p>Ce labo est conçu pour une <strong>seule VM Windows</strong>. Toutes les manipulations restent dans un dossier de travail pédagogique. Les actions demandées sont sûres : création de dossiers, création d’utilisateurs locaux simples, tri de fichiers dans des dossiers de test, diagnostic réseau local, batch de lancement, recherche de doublons et archivage de livrables.</p>
+<div class="callout spaced-block"><strong>Barème :</strong> les parties 1 à 4 représentent ensemble <strong>60 % de la note</strong>.</div>
+<div class="callout spaced-block"><strong>Important :</strong> toutes les manipulations demandées sont locales, sûres et réalisables dans le dossier de travail du labo.</div>
+</div>
+</section>
+<section class="section-block line-section">
+<h3 class="section-title" id="p1-s2">Préparer la structure du labo</h3>
+<div class="section-body">
+<p>Cette étape est entièrement <strong>guidée</strong>. Exécutez le bloc suivant dans PowerShell.</p>
+<section class="snippet-embed"><section class="code-window theme-powershell"><div class="window-header"><div class="window-controls"><span></span><span></span><span></span></div><div class="window-title">preparer_labo_vm_nom_etudiant.ps1</div><button class="copy-btn" data-copy-mode="plain" data-copy-target="ps-setup-vm-safe" type="button">Copier</button></div><div class="code-body"><div class="terminal-intro">PS C:\Users\Etudiant&gt;</div><div class="code-content" id="ps-setup-vm-safe"><div class="line" data-copy='$LabRoot = "$env:USERPROFILE\Documents\Labo_VM_Nom-Etudiant"'><span class="line-no">1</span><span class="line-text">$LabRoot = "$env:USERPROFILE\Documents\Labo_VM_Nom-Etudiant"</span></div><div class="line" data-copy='$folders = "data","scripts","logs","rapport","archives","depot_source","depot_source2","a_traiter","downloads_test","photos"'><span class="line-no">2</span><span class="line-text">$folders = "data","scripts","logs","rapport","archives","depot_source","depot_source2","a_traiter","downloads_test","photos"</span></div><div class="line" data-copy="New-Item -Path $LabRoot -ItemType Directory -Force | Out-Null"><span class="line-no">3</span><span class="line-text">New-Item -Path $LabRoot -ItemType Directory -Force | Out-Null</span></div><div class="line" data-copy="$folders | ForEach-Object { New-Item -Path (Join-Path $LabRoot $_) -ItemType Directory -Force | Out-Null }"><span class="line-no">4</span><span class="line-text">$folders | ForEach-Object { New-Item -Path (Join-Path $LabRoot $_) -ItemType Directory -Force | Out-Null }</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "depot_source\image1.jpg") -Value "jpg"'><span class="line-no">5</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "depot_source\image1.jpg") -Value "jpg"</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "depot_source\image2.png") -Value "png"'><span class="line-no">6</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "depot_source\image2.png") -Value "png"</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "depot_source\doc1.pdf") -Value "pdf"'><span class="line-no">7</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "depot_source\doc1.pdf") -Value "pdf"</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "depot_source\notes.txt") -Value "texte"'><span class="line-no">8</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "depot_source\notes.txt") -Value "texte"</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "depot_source2\image3.jpg") -Value "jpg"'><span class="line-no">9</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "depot_source2\image3.jpg") -Value "jpg"</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "depot_source2\image4.png") -Value "png"'><span class="line-no">10</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "depot_source2\image4.png") -Value "png"</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "depot_source2\doc2.pdf") -Value "pdf"'><span class="line-no">11</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "depot_source2\doc2.pdf") -Value "pdf"</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "depot_source2\notes2.txt") -Value "texte"'><span class="line-no">12</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "depot_source2\notes2.txt") -Value "texte"</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "downloads_test\imageA.jpg") -Value "jpg"'><span class="line-no">13</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "downloads_test\imageA.jpg") -Value "jpg"</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "downloads_test\imageB.png") -Value "png"'><span class="line-no">14</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "downloads_test\imageB.png") -Value "png"</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "downloads_test\rapport.pdf") -Value "pdf"'><span class="line-no">15</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "downloads_test\rapport.pdf") -Value "pdf"</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "downloads_test\memo.txt") -Value "texte"'><span class="line-no">16</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "downloads_test\memo.txt") -Value "texte"</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "photos\photo1.txt") -Value "meme contenu"'><span class="line-no">17</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "photos\photo1.txt") -Value "meme contenu"</span></div><div class="line" data-copy='Copy-Item (Join-Path $LabRoot "photos\photo1.txt") (Join-Path $LabRoot "photos\photo1_copie.txt")'><span class="line-no">18</span><span class="line-text">Copy-Item (Join-Path $LabRoot "photos\photo1.txt") (Join-Path $LabRoot "photos\photo1_copie.txt")</span></div><div class="line" data-copy='Set-Content -Path (Join-Path $LabRoot "photos\photo2.txt") -Value "contenu différent"'><span class="line-no">19</span><span class="line-text">Set-Content -Path (Join-Path $LabRoot "photos\photo2.txt") -Value "contenu différent"</span></div><div class="line" data-copy="Set-Location -Path $LabRoot"><span class="line-no">20</span><span class="line-text">Set-Location -Path $LabRoot</span></div><div class="line" data-copy="Get-ChildItem"><span class="line-no">21</span><span class="line-text">Get-ChildItem</span></div></div></div></section></section>
+<div class="callout spaced-block"><strong>Pourquoi ces dossiers ?</strong> <code>depot_source</code>, <code>depot_source2</code> et <code>a_traiter</code> serviront à l’automatisation observable. <code>downloads_test</code> et <code>photos</code> serviront plus tard aux tâches autonomes de tri et de recherche de doublons.</div>
+<div class="proof callout spaced-block" data-proof-id="p1-proof-setup">
+<div class="proof-head"><strong>Capture obligatoire :</strong> montrez le résultat du script dans <strong>l’Explorateur Windows</strong>, avec le dossier <strong>Labo_VM_Nom-Etudiant</strong> et ses sous-dossiers visibles.</div>
+<div class="proof-body" tabindex="0" title="Cliquez ici puis collez une image depuis le presse-papiers avec Ctrl+V">
+<div class="proofEmpty"><button class="btnCapture proofInsertLink" type="button">Insérer</button> ici la capture demandée.<div class="proofPasteHint">ou collez une image enregistrée dans le presse-papiers avec Ctrl+V.</div></div>
+<img alt="Capture de l’étudiant" class="proofImg"/>
+<input accept="image/*" class="proofFile" hidden="" type="file"/>
+<div class="proofBodyActions"><button class="btnClear proofRemoveLink" type="button">retirer la capture</button></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</section>
+<section class="part" id="partie-2">
+<div class="part-header"><h2 class="part-title">Partie 2 — Bloc guidé : données du labo et documentation de départ (60 % avec les parties 1 à 4)</h2></div>
+<div class="part-body">
+<section class="section-block line-section">
+<h3 class="section-title" id="p2-s1">Créer le fichier utilisateurs.csv</h3>
+<div class="section-body">
+<p>Enregistrez ce fichier dans <code>%USERPROFILE%\Documents\Labo_VM_Nom-Etudiant\data\utilisateurs.csv</code>. Il servira à la création simple des comptes locaux et des groupes.</p>
+<div class="code-or-file">
+<span class="file-label">Contenu à enregistrer dans <strong>utilisateurs.csv</strong></span>
+<div class="codewrap">
+<div class="codebar">
+<span class="codelabel">Contenu du fichier</span>
+<button class="copybtn" data-copy-target="csv-users-vm-safe" type="button">Copier</button>
+</div>
+<pre class="shell" id="csv-users-vm-safe">NomUser,Password,Groupe
+support1,P@ssw0rd123,Support
+support2,P@ssw0rd123,Support
+stag1,P@ssw0rd123,Stagiaires
+stag2,P@ssw0rd123,Stagiaires</pre>
+</div>
+</div>
+<div class="proof callout spaced-block" data-proof-id="p2-proof-csv">
+<div class="proof-head"><strong>Capture obligatoire :</strong> montrez le fichier <strong>utilisateurs.csv</strong> enregistré dans le dossier <strong>data</strong> dans <strong>l’Explorateur Windows</strong>, avec les colonnes <strong>Type</strong>, <strong>Taille</strong> et <strong>Modifié le</strong> visibles.</div>
+<div class="proof-body" tabindex="0" title="Cliquez ici puis collez une image depuis le presse-papiers avec Ctrl+V">
+<div class="proofEmpty"><button class="btnCapture proofInsertLink" type="button">Insérer</button> ici la capture demandée.<div class="proofPasteHint">ou collez une image enregistrée dans le presse-papiers avec Ctrl+V.</div></div>
+<img alt="Capture de l’étudiant" class="proofImg"/>
+<input accept="image/*" class="proofFile" hidden="" type="file"/>
+<div class="proofBodyActions"><button class="btnClear proofRemoveLink" type="button">retirer la capture</button></div>
+</div>
+</div><div class="resultblock"><p><strong>Exemple de résultat attendu :</strong> fichier CSV visible dans l’Explorateur Windows avec le type et la taille affichés.</p><figure class="content-figure"><img alt="Exemple de résultat attendu" class="content-image" src="img/exemple_csv_explorateur.png"/></figure></div>
+<div class="callout spaced-block"><strong>À saisir :</strong> Indiquez quelle colonne du CSV permet de relier automatiquement un utilisateur à un groupe local.
+ <div class="answer-area"><textarea class="team-input answerbox-large" id="p2_answer_csv" placeholder="Écris ici ta réponse..."></textarea></div>
+</div>
+</div>
+</section>
+<section class="section-block line-section">
+<h3 class="section-title" id="p2-s2">Préparer la documentation de départ</h3>
+<div class="section-body">
+<p>Créez dès maintenant un fichier <code>README_TECHNIQUE.md</code> dans le dossier <code>rapport</code>. Vous le compléterez à la fin du labo, mais il est préférable de préparer sa structure maintenant.</p>
+<div class="code-or-file">
+<span class="file-label">Modèle de départ pour <strong>README_TECHNIQUE.md</strong></span>
+<div class="codewrap">
+<div class="codebar">
+<span class="codelabel">Contenu du fichier</span>
+<button class="copybtn" data-copy-target="readme-vm-template-safe" type="button">Copier</button>
+</div>
+<pre class="shell" id="readme-vm-template-safe"># README technique du labo VM unique
+
+## 1. structure du dossier
+- expliquer le rôle de data, scripts, logs, rapport, archives, depot_source, depot_source2, a_traiter, downloads_test et photos
+
+## 2. scripts guidés réalisés
+- creer_utilisateurs_groupes.ps1
+- tri_observable.ps1
+- diagnostic_vm.ps1
+
+## 3. scripts autonomes réalisés
+- recherche_doublons.ps1
+- rangement_par_type.ps1
+- lancer_creation.bat
+- lancer_diagnostic.bat
+
+## 4. tests réellement effectués
+- utilisateurs créés
+- tri observable essayé deux fois
+- diagnostic généré
+- doublons vérifiés
+- rangement par type vérifié
+
+## 5. difficultés et solutions
+- ...
+
+## 6. fichiers remis
+- ...</pre>
+</div>
+</div>
+</div>
+</section>
+</div>
+</section>
+<section class="part" id="partie-3">
+<div class="part-header"><h2 class="part-title">Partie 3 — Bloc guidé : création locale des utilisateurs et groupes (60 % avec les parties 1 à 4)</h2></div>
+<div class="part-body">
+<section class="section-block line-section">
+<h3 class="section-title" id="p3-s1">Écrire puis exécuter le script de création</h3>
+<div class="section-body">
+<p>Enregistrez ce script dans <code>scripts\creer_utilisateurs_groupes.ps1</code>, puis exécutez-le dans PowerShell.</p>
+<section class="snippet-embed"><section class="code-window theme-powershell"><div class="window-header"><div class="window-controls"><span></span><span></span><span></span></div><div class="window-title">creer_utilisateurs_groupes.ps1</div><button class="copy-btn" data-copy-mode="plain" data-copy-target="ps-create-users-vm-safe" type="button">Copier</button></div><div class="code-body"><div class="terminal-intro">PS C:\Users\Etudiant&gt;</div><div class="code-content" id="ps-create-users-vm-safe"><div class="line" data-copy='$LabRoot = "$env:USERPROFILE\Documents\Labo_VM_Nom-Etudiant"'><span class="line-no">1</span><span class="line-text">$LabRoot = "$env:USERPROFILE\Documents\Labo_VM_Nom-Etudiant"</span></div><div class="line" data-copy='$CsvPath = Join-Path $LabRoot "data\utilisateurs.csv"'><span class="line-no">2</span><span class="line-text">$CsvPath = Join-Path $LabRoot "data\utilisateurs.csv"</span></div><div class="line" data-copy='$LogPath = Join-Path $LabRoot "logs\creation_utilisateurs.log"'><span class="line-no">3</span><span class="line-text">$LogPath = Join-Path $LabRoot "logs\creation_utilisateurs.log"</span></div><div class="line" data-copy=""><span class="line-no">4</span><span class="line-text"></span></div><div class="line" data-copy="if (-not (Test-Path $CsvPath)) {"><span class="line-no">5</span><span class="line-text">if (-not (Test-Path $CsvPath)) {</span></div><div class="line" data-copy='  Write-Host "Fichier CSV introuvable : $CsvPath" -ForegroundColor Red'><span class="line-no">6</span><span class="line-text">  Write-Host "Fichier CSV introuvable : $CsvPath" -ForegroundColor Red</span></div><div class="line" data-copy="  exit"><span class="line-no">7</span><span class="line-text">  exit</span></div><div class="line" data-copy="}"><span class="line-no">8</span><span class="line-text">}</span></div><div class="line" data-copy=""><span class="line-no">9</span><span class="line-text"></span></div><div class="line" data-copy="if (-not (Test-Path (Split-Path $LogPath))) {"><span class="line-no">10</span><span class="line-text">if (-not (Test-Path (Split-Path $LogPath))) {</span></div><div class="line" data-copy="  New-Item -ItemType Directory -Path (Split-Path $LogPath) -Force | Out-Null"><span class="line-no">11</span><span class="line-text">  New-Item -ItemType Directory -Path (Split-Path $LogPath) -Force | Out-Null</span></div><div class="line" data-copy="}"><span class="line-no">12</span><span class="line-text">}</span></div><div class="line" data-copy=""><span class="line-no">13</span><span class="line-text"></span></div><div class="line" data-copy="$utilisateurs = Import-Csv -Path $CsvPath"><span class="line-no">14</span><span class="line-text">$utilisateurs = Import-Csv -Path $CsvPath</span></div><div class="line" data-copy=""><span class="line-no">15</span><span class="line-text"></span></div><div class="line" data-copy="$groupesExistants = @()"><span class="line-no">16</span><span class="line-text">$groupesExistants = @()</span></div><div class="line" data-copy="$groupListRaw = net localgroup"><span class="line-no">17</span><span class="line-text">$groupListRaw = net localgroup</span></div><div class="line" data-copy=""><span class="line-no">18</span><span class="line-text"></span></div><div class="line" data-copy="foreach ($line in $groupListRaw) {"><span class="line-no">19</span><span class="line-text">foreach ($line in $groupListRaw) {</span></div><div class="line" data-copy='  if ($line -match "^\*") {'><span class="line-no">20</span><span class="line-text">  if ($line -match "^\*") {</span></div><div class="line" data-copy='    $groupesExistants += $line.TrimStart("*").Trim()'><span class="line-no">21</span><span class="line-text">    $groupesExistants += $line.TrimStart("*").Trim()</span></div><div class="line" data-copy="  }"><span class="line-no">22</span><span class="line-text">  }</span></div><div class="line" data-copy="}"><span class="line-no">23</span><span class="line-text">}</span></div><div class="line" data-copy=""><span class="line-no">24</span><span class="line-text"></span></div><div class="line" data-copy="foreach ($u in $utilisateurs) {"><span class="line-no">25</span><span class="line-text">foreach ($u in $utilisateurs) {</span></div><div class="line" data-copy="  $nom = $u.NomUser.Trim()"><span class="line-no">26</span><span class="line-text">  $nom = $u.NomUser.Trim()</span></div><div class="line" data-copy="  $motDePasse = $u.Password.Trim()"><span class="line-no">27</span><span class="line-text">  $motDePasse = $u.Password.Trim()</span></div><div class="line" data-copy="  $groupe = $u.Groupe.Trim()"><span class="line-no">28</span><span class="line-text">  $groupe = $u.Groupe.Trim()</span></div><div class="line" data-copy=""><span class="line-no">29</span><span class="line-text"></span></div><div class="line" data-copy="  if ([string]::IsNullOrWhiteSpace($nom) -or"><span class="line-no">30</span><span class="line-text">  if ([string]::IsNullOrWhiteSpace($nom) -or</span></div><div class="line" data-copy="    [string]::IsNullOrWhiteSpace($motDePasse) -or"><span class="line-no">31</span><span class="line-text">    [string]::IsNullOrWhiteSpace($motDePasse) -or</span></div><div class="line" data-copy="    [string]::IsNullOrWhiteSpace($groupe)) {"><span class="line-no">32</span><span class="line-text">    [string]::IsNullOrWhiteSpace($groupe)) {</span></div><div class="line" data-copy='    Add-Content -Path $LogPath -Value "$(Get-Date -Format s) | Ligne ignorée | données manquantes"'><span class="line-no">33</span><span class="line-text">    Add-Content -Path $LogPath -Value "$(Get-Date -Format s) | Ligne ignorée | données manquantes"</span></div><div class="line" data-copy="    continue"><span class="line-no">34</span><span class="line-text">    continue</span></div><div class="line" data-copy="  }"><span class="line-no">35</span><span class="line-text">  }</span></div><div class="line" data-copy=""><span class="line-no">36</span><span class="line-text"></span></div><div class="line" data-copy="  if (-not ($groupesExistants -contains $groupe)) {"><span class="line-no">37</span><span class="line-text">  if (-not ($groupesExistants -contains $groupe)) {</span></div><div class="line" data-copy='    cmd /c "net localgroup `"$groupe`" /add" | Out-Null'><span class="line-no">38</span><span class="line-text">    cmd /c "net localgroup `"$groupe`" /add" | Out-Null</span></div><div class="line" data-copy="    $groupesExistants += $groupe"><span class="line-no">39</span><span class="line-text">    $groupesExistants += $groupe</span></div><div class="line" data-copy="  }"><span class="line-no">40</span><span class="line-text">  }</span></div><div class="line" data-copy=""><span class="line-no">41</span><span class="line-text"></span></div><div class="line" data-copy='  cmd /c "net user `"$nom`"" | Out-Null'><span class="line-no">42</span><span class="line-text">  cmd /c "net user `"$nom`"" | Out-Null</span></div><div class="line" data-copy="  $utilisateurExiste = ($LASTEXITCODE -eq 0)"><span class="line-no">43</span><span class="line-text">  $utilisateurExiste = ($LASTEXITCODE -eq 0)</span></div><div class="line" data-copy=""><span class="line-no">44</span><span class="line-text"></span></div><div class="line" data-copy="  if (-not $utilisateurExiste) {"><span class="line-no">45</span><span class="line-text">  if (-not $utilisateurExiste) {</span></div><div class="line" data-copy='    cmd /c "net user `"$nom`" `"$motDePasse`" /add" | Out-Null'><span class="line-no">46</span><span class="line-text">    cmd /c "net user `"$nom`" `"$motDePasse`" /add" | Out-Null</span></div><div class="line" data-copy="  }"><span class="line-no">47</span><span class="line-text">  }</span></div><div class="line" data-copy=""><span class="line-no">48</span><span class="line-text"></span></div><div class="line" data-copy='  cmd /c "net localgroup `"$groupe`" `"$nom`" /add" | Out-Null'><span class="line-no">49</span><span class="line-text">  cmd /c "net localgroup `"$groupe`" `"$nom`" /add" | Out-Null</span></div><div class="line" data-copy=""><span class="line-no">50</span><span class="line-text"></span></div><div class="line" data-copy='  Add-Content -Path $LogPath -Value "$(Get-Date -Format s) | $nom | $groupe | créé/ou vérifié"'><span class="line-no">51</span><span class="line-text">  Add-Content -Path $LogPath -Value "$(Get-Date -Format s) | $nom | $groupe | créé/ou vérifié"</span></div><div class="line" data-copy='  Write-Host "Traitement de $nom terminé" -ForegroundColor Cyan'><span class="line-no">52</span><span class="line-text">  Write-Host "Traitement de $nom terminé" -ForegroundColor Cyan</span></div><div class="line" data-copy=""><span class="line-no">53</span><span class="line-text"></span></div><div class="line" data-copy="  Start-Sleep -Seconds 1"><span class="line-no">54</span><span class="line-text">  Start-Sleep -Seconds 1</span></div><div class="line" data-copy="}"><span class="line-no">55</span><span class="line-text">}</span></div><div class="line" data-copy=""><span class="line-no">56</span><span class="line-text"></span></div><div class="line" data-copy="Get-Content $LogPath"><span class="line-no">57</span><span class="line-text">Get-Content $LogPath</span></div></div></div></section></section>
+<div class="callout spaced-block"><strong>Validation immédiate :</strong> vérifiez au moins un groupe local, un utilisateur local et le contenu du fichier journal <code>creation_utilisateurs.log</code>.</div>
+<div class="proof callout spaced-block" data-proof-id="p3-proof-users-terminal"><div class="proof-head"><div><strong>Capture obligatoire :</strong> montrez l’exécution du script dans le terminal avec au moins un message <strong>Traitement de... terminé</strong> visible.</div></div><div class="proof-body" tabindex="0" title="Cliquez ici puis collez une image depuis le presse-papiers avec Ctrl+V"><div class="proofEmpty"><button class="btnCapture proofInsertLink" type="button">Insérer</button> ici la capture demandée.<div class="proofPasteHint">ou collez une image enregistrée dans le presse-papiers avec Ctrl+V.</div></div><img alt="Capture de l’étudiant" class="proofImg"/><input accept="image/*" class="proofFile" hidden="" type="file"/><div class="proofBodyActions"><button class="btnClear proofRemoveLink" type="button">retirer la capture</button></div></div></div><div class="proof callout spaced-block" data-proof-id="p3-proof-users-log"><div class="proof-head"><div><strong>Capture obligatoire :</strong> montrez le fichier <strong>creation_utilisateurs.log</strong> ouvert avec plusieurs lignes correctement remplies.</div></div><div class="proof-body" tabindex="0" title="Cliquez ici puis collez une image depuis le presse-papiers avec Ctrl+V"><div class="proofEmpty"><button class="btnCapture proofInsertLink" type="button">Insérer</button> ici la capture demandée.<div class="proofPasteHint">ou collez une image enregistrée dans le presse-papiers avec Ctrl+V.</div></div><img alt="Capture de l’étudiant" class="proofImg"/><input accept="image/*" class="proofFile" hidden="" type="file"/><div class="proofBodyActions"><button class="btnClear proofRemoveLink" type="button">retirer la capture</button></div></div></div>
+<div class="callout spaced-block"><strong>À saisir :</strong> Expliquez pourquoi un journal d’exécution est utile quand on automatise la création de comptes.
+ <div class="answer-area"><textarea class="team-input answerbox-large" id="p3_answer_users" placeholder="Écris ici ta réponse..."></textarea></div>
+</div>
+</div>
+</section>
+</div>
+</section>
+<section class="part" id="partie-4">
+<div class="part-header"><h2 class="part-title">Partie 4 — Bloc guidé : automatisation observable et diagnostic local (60 % avec les parties 1 à 4)</h2></div>
+<div class="part-body">
+<section class="section-block line-section">
+<h3 class="section-title" id="p4-s1">Automatisation observable pendant l’exécution</h3>
+<div class="section-body">
+<p>Cette tâche doit permettre d’<strong>observer l’automatisation pendant l’exécution</strong>. Le script ci-dessous surveille le dossier <code>a_traiter</code>, puis range automatiquement les fichiers par type. Faites un premier essai avec <code>depot_source</code>, puis un deuxième essai avec <code>depot_source2</code>, afin d’observer le résultat sur place deux fois.</p>
+<section class="snippet-embed"><section class="code-window theme-powershell"><div class="window-header"><div class="window-controls"><span></span><span></span><span></span></div><div class="window-title">tri_observable.ps1</div><button class="copy-btn" data-copy-mode="plain" data-copy-target="ps-live-sort-vm" type="button">Copier</button></div><div class="code-body"><div class="terminal-intro">PS C:\Users\Etudiant&gt;</div><div class="code-content" id="ps-live-sort-vm"><div class="line" data-copy='$LabRoot = "$env:USERPROFILE\Documents\Labo_VM_Nom-Etudiant"'><span class="line-no">1</span><span class="line-text">$LabRoot = "$env:USERPROFILE\Documents\Labo_VM_Nom-Etudiant"</span></div><div class="line" data-copy='$WatchFolder = Join-Path $LabRoot "a_traiter"'><span class="line-no">2</span><span class="line-text">$WatchFolder = Join-Path $LabRoot "a_traiter"</span></div><div class="line" data-copy='$LogPath = Join-Path $LabRoot "logs\tri_observable.log"'><span class="line-no">3</span><span class="line-text">$LogPath = Join-Path $LabRoot "logs\tri_observable.log"</span></div><div class="line" data-copy='$DepotSource = Join-Path $LabRoot "depot_source"'><span class="line-no">4</span><span class="line-text">$DepotSource = Join-Path $LabRoot "depot_source"</span></div><div class="line" data-copy='$DepotSource2 = Join-Path $LabRoot "depot_source2"'><span class="line-no">5</span><span class="line-text">$DepotSource2 = Join-Path $LabRoot "depot_source2"</span></div><div class="line" data-copy='$ImagesFolder = Join-Path $WatchFolder "Images"'><span class="line-no">6</span><span class="line-text">$ImagesFolder = Join-Path $WatchFolder "Images"</span></div><div class="line" data-copy='$DocumentsFolder = Join-Path $WatchFolder "Documents"'><span class="line-no">7</span><span class="line-text">$DocumentsFolder = Join-Path $WatchFolder "Documents"</span></div><div class="line" data-copy='$TextesFolder = Join-Path $WatchFolder "Textes"'><span class="line-no">8</span><span class="line-text">$TextesFolder = Join-Path $WatchFolder "Textes"</span></div><div class="line" data-copy="New-Item -Path $ImagesFolder -ItemType Directory -Force | Out-Null"><span class="line-no">9</span><span class="line-text">New-Item -Path $ImagesFolder -ItemType Directory -Force | Out-Null</span></div><div class="line" data-copy="New-Item -Path $DocumentsFolder -ItemType Directory -Force | Out-Null"><span class="line-no">10</span><span class="line-text">New-Item -Path $DocumentsFolder -ItemType Directory -Force | Out-Null</span></div><div class="line" data-copy="New-Item -Path $TextesFolder -ItemType Directory -Force | Out-Null"><span class="line-no">11</span><span class="line-text">New-Item -Path $TextesFolder -ItemType Directory -Force | Out-Null</span></div><div class="line" data-copy='"Lancez ce script dans une console PowerShell indépendante et laissez la fenêtre ouverte." | Set-Content -Path $LogPath'><span class="line-no">12</span><span class="line-text">"Lancez ce script dans une console PowerShell indépendante et laissez la fenêtre ouverte." | Set-Content -Path $LogPath</span></div><div class="line" data-copy='Write-Host "Console de surveillance active. Faites un premier essai avec depot_source puis un deuxième avec depot_source2." -ForegroundColor Yellow'><span class="line-no">13</span><span class="line-text">Write-Host "Console de surveillance active. Faites un premier essai avec depot_source puis un deuxième avec depot_source2." -ForegroundColor Yellow</span></div><div class="line" data-copy="while ($true) {"><span class="line-no">14</span><span class="line-text">while ($true) {</span></div><div class="line" data-copy="  $files = Get-ChildItem -Path $WatchFolder -File -ErrorAction SilentlyContinue"><span class="line-no">15</span><span class="line-text">  $files = Get-ChildItem -Path $WatchFolder -File -ErrorAction SilentlyContinue</span></div><div class="line" data-copy="  foreach ($file in $files) {"><span class="line-no">16</span><span class="line-text">  foreach ($file in $files) {</span></div><div class="line" data-copy="    switch ($file.Extension.ToLower()) {"><span class="line-no">17</span><span class="line-text">    switch ($file.Extension.ToLower()) {</span></div><div class="line" data-copy='      ".jpg" { $dest = $ImagesFolder }'><span class="line-no">18</span><span class="line-text">      ".jpg" { $dest = $ImagesFolder }</span></div><div class="line" data-copy='      ".png" { $dest = $ImagesFolder }'><span class="line-no">19</span><span class="line-text">      ".png" { $dest = $ImagesFolder }</span></div><div class="line" data-copy='      ".pdf" { $dest = $DocumentsFolder }'><span class="line-no">20</span><span class="line-text">      ".pdf" { $dest = $DocumentsFolder }</span></div><div class="line" data-copy='      ".docx" { $dest = $DocumentsFolder }'><span class="line-no">21</span><span class="line-text">      ".docx" { $dest = $DocumentsFolder }</span></div><div class="line" data-copy='      ".txt" { $dest = $TextesFolder }'><span class="line-no">22</span><span class="line-text">      ".txt" { $dest = $TextesFolder }</span></div><div class="line" data-copy='      ".log" { $dest = $TextesFolder }'><span class="line-no">23</span><span class="line-text">      ".log" { $dest = $TextesFolder }</span></div><div class="line" data-copy="      default { $dest = $WatchFolder }"><span class="line-no">24</span><span class="line-text">      default { $dest = $WatchFolder }</span></div><div class="line" data-copy="    }"><span class="line-no">25</span><span class="line-text">    }</span></div><div class="line" data-copy="    if ($dest -ne $WatchFolder) {"><span class="line-no">26</span><span class="line-text">    if ($dest -ne $WatchFolder) {</span></div><div class="line" data-copy="      Move-Item -Path $file.FullName -Destination (Join-Path $dest $file.Name) -Force"><span class="line-no">27</span><span class="line-text">      Move-Item -Path $file.FullName -Destination (Join-Path $dest $file.Name) -Force</span></div><div class="line" data-copy='      Write-Host "$($file.Name) déplacé vers $(Split-Path $dest -Leaf)" -ForegroundColor Green'><span class="line-no">28</span><span class="line-text">      Write-Host "$($file.Name) déplacé vers $(Split-Path $dest -Leaf)" -ForegroundColor Green</span></div><div class="line" data-copy='      Add-Content -Path $LogPath -Value "$(Get-Date -Format T) | $($file.Name) -&gt; $(Split-Path $dest -Leaf)"'><span class="line-no">29</span><span class="line-text">      Add-Content -Path $LogPath -Value "$(Get-Date -Format T) | $($file.Name) -&gt; $(Split-Path $dest -Leaf)"</span></div><div class="line" data-copy="      Start-Sleep -Seconds 1"><span class="line-no">30</span><span class="line-text">      Start-Sleep -Seconds 1</span></div><div class="line" data-copy="    }"><span class="line-no">31</span><span class="line-text">    }</span></div><div class="line" data-copy="  }"><span class="line-no">32</span><span class="line-text">  }</span></div><div class="line" data-copy="  Start-Sleep -Seconds 2"><span class="line-no">33</span><span class="line-text">  Start-Sleep -Seconds 2</span></div><div class="line" data-copy="}"><span class="line-no">34</span><span class="line-text">}</span></div></div></div></section></section>
+<div class="callout spaced-block"><strong>Procédure de test :</strong> lancez ce script dans une <strong>console PowerShell indépendante</strong> et laissez la fenêtre ouverte. Divisez ensuite l’écran en <strong>3 parties</strong> : la console PowerShell, un dossier source et le dossier <code>a_traiter</code>. Faites un <strong>premier essai</strong> en copiant les fichiers de <code>depot_source</code> vers <code>a_traiter</code>, puis faites un <strong>deuxième essai</strong> avec <code>depot_source2</code>. Observez le tri automatique dans l’Explorateur Windows pendant les deux essais. Arrêtez le script seulement après les captures, avec <code>Ctrl + C</code>.</div>
+<div class="proof callout spaced-block" data-proof-id="p4-proof-live">
+<div class="proof-head"><strong>Capture obligatoire :</strong> montrez le <strong>deuxième essai</strong> avec l’écran divisé en <strong>3 parties</strong> : la console PowerShell avec le script encore en cours d’exécution, le dossier <strong>depot_source2</strong> et le dossier <strong>a_traiter</strong> dans l’Explorateur Windows.</div>
+<div class="proof-body" tabindex="0" title="Cliquez ici puis collez une image depuis le presse-papiers avec Ctrl+V">
+<div class="proofEmpty"><button class="btnCapture proofInsertLink" type="button">Insérer</button> ici la capture demandée.<div class="proofPasteHint">ou collez une image enregistrée dans le presse-papiers avec Ctrl+V.</div></div>
+<img alt="Capture de l’étudiant" class="proofImg"/>
+<input accept="image/*" class="proofFile" hidden="" type="file"/>
+<div class="proofBodyActions"><button class="btnClear proofRemoveLink" type="button">retirer la capture</button></div>
+</div>
+</div><div class="proof callout spaced-block" data-proof-id="p4-proof-live-2">
+<div class="proof-head"><strong>Capture obligatoire :</strong> montrez le <strong>deuxième essai</strong> avec la console PowerShell encore active, le dossier <strong>depot_source2</strong> et le dossier <strong>a_traiter</strong> dans l’Explorateur Windows.</div>
+<div class="proof-body" tabindex="0" title="Cliquez ici puis collez une image depuis le presse-papiers avec Ctrl+V">
+<div class="proofEmpty"><button class="btnCapture proofInsertLink" type="button">Insérer</button> ici la capture demandée.<div class="proofPasteHint">ou collez une image enregistrée dans le presse-papiers avec Ctrl+V.</div></div>
+<img alt="Capture de l’étudiant" class="proofImg"/>
+<input accept="image/*" class="proofFile" hidden="" type="file"/>
+<div class="proofBodyActions"><button class="btnClear proofRemoveLink" type="button">retirer la capture</button></div>
+</div>
+</div><div class="resultblock"><p><strong>Exemple de résultat attendu :</strong> écran partagé entre la console, le dépôt source et le dossier à traiter.</p><figure class="content-figure"><img alt="Exemple de résultat attendu" class="content-image" src="img/exemple_tri_observable.png"/></figure></div>
+</div>
+</section>
+<section class="section-block line-section">
+<h3 class="section-title" id="p4-s2">Produire un diagnostic local sûr sur la même VM</h3>
+<div class="section-body">
+<p>Le diagnostic suivant reste entièrement local et ne dépend d’aucune deuxième machine virtuelle.</p>
+<section class="snippet-embed">
+<section class="code-window theme-powershell">
+<div class="window-header">
+<div class="window-controls"><span></span><span></span><span></span></div>
+<div class="window-title">diagnostic_vm.ps1</div>
+<button class="copy-btn" data-copy-mode="plain" data-copy-target="ps-diag-vm-safe" type="button">Copier</button>
+</div>
+<div class="code-body">
+<div class="terminal-intro">PS C:\Users\Etudiant&gt;</div>
+<div class="code-content" id="ps-diag-vm-safe">
+<div class="line" data-copy='$LabRoot = "$env:USERPROFILE\Documents\Labo_VM_Nom-Etudiant"' data-help="Le rapport sera sauvegardé dans le même labo." data-help-title="Réutiliser la même racine" tabindex="0"><span class="line-no">1</span><span class="line-text">$LabRoot = "$env:USERPROFILE\Documents\Labo_VM_Nom-Etudiant"</span></div><div class="line" data-copy='$ReportPath = Join-Path $LabRoot "rapport\diagnostic_vm.txt"' data-help="Tout le diagnostic sera consigné dans un seul fichier." data-help-title="Préparer le rapport" tabindex="0"><span class="line-no">2</span><span class="line-text">$ReportPath = Join-Path $LabRoot "rapport\diagnostic_vm.txt"</span></div><div class="line" data-copy='"=== diagnostic de la VM ===" | Set-Content -Path $ReportPath' data-help="Le fichier est créé immédiatement." data-help-title="Créer le rapport" tabindex="0"><span class="line-no">3</span><span class="line-text">"=== diagnostic de la VM ===" | Set-Content -Path $ReportPath</span></div><div class="line" data-copy='"--- configuration IP ---" | Add-Content -Path $ReportPath' data-help="Les titres rendent la lecture plus facile." data-help-title="Structurer le rapport" tabindex="0"><span class="line-no">4</span><span class="line-text">"--- configuration IP ---" | Add-Content -Path $ReportPath</span></div><div class="line" data-copy="Get-NetIPConfiguration | Format-List InterfaceAlias,IPv4Address,IPv4DefaultGateway,DNSServer | Out-String | Add-Content -Path $ReportPath" data-help="On récupère les informations réseau essentielles." data-help-title="Consigner la configuration IP" tabindex="0"><span class="line-no">5</span><span class="line-text">Get-NetIPConfiguration | Format-List InterfaceAlias,IPv4Address,IPv4DefaultGateway,DNSServer | Out-String | Add-Content -Path $ReportPath</span></div><div class="line" data-copy='"--- test loopback ---" | Add-Content -Path $ReportPath' data-help="Le loopback fonctionne sur une seule machine." data-help-title="Préparer le test local" tabindex="0"><span class="line-no">6</span><span class="line-text">"--- test loopback ---" | Add-Content -Path $ReportPath</span></div><div class="line" data-copy="Test-Connection 127.0.0.1 -Count 2 | Out-String | Add-Content -Path $ReportPath" data-help="Ce test n’exige aucune autre VM." data-help-title="Tester la pile TCP/IP locale" tabindex="0"><span class="line-no">7</span><span class="line-text">Test-Connection 127.0.0.1 -Count 2 | Out-String | Add-Content -Path $ReportPath</span></div><div class="line" data-copy='"--- résolution DNS ---" | Add-Content -Path $ReportPath' data-help="Le rapport est structuré par sections." data-help-title="Préparer le test DNS" tabindex="0"><span class="line-no">8</span><span class="line-text">"--- résolution DNS ---" | Add-Content -Path $ReportPath</span></div><div class="line" data-copy="Resolve-DnsName localhost | Out-String | Add-Content -Path $ReportPath" data-help="localhost reste plus stable qu’un site externe." data-help-title="Tester une résolution sûre" tabindex="0"><span class="line-no">9</span><span class="line-text">Resolve-DnsName localhost | Out-String | Add-Content -Path $ReportPath</span></div><div class="line" data-copy='"--- ports en écoute ---" | Add-Content -Path $ReportPath' data-help="Le rapport montrera aussi des ports en écoute." data-help-title="Préparer la section ports" tabindex="0"><span class="line-no">10</span><span class="line-text">"--- ports en écoute ---" | Add-Content -Path $ReportPath</span></div><div class="line" data-copy="Get-NetTCPConnection -State Listen | Select-Object -First 10 LocalAddress,LocalPort,OwningProcess | Format-Table -AutoSize | Out-String | Add-Content -Path $ReportPath" data-help="Le résultat reste local et sûr." data-help-title="Lister les ports en écoute" tabindex="0"><span class="line-no">11</span><span class="line-text">Get-NetTCPConnection -State Listen | Select-Object -First 10 LocalAddress,LocalPort,OwningProcess | Format-Table -AutoSize | Out-String | Add-Content -Path $ReportPath</span></div><div class="line" data-copy="Get-Content $ReportPath" data-help="La sortie complète sera facile à capturer." data-help-title="Afficher le rapport" tabindex="0"><span class="line-no">12</span><span class="line-text">Get-Content $ReportPath</span></div>
+</div>
+</div>
+</section>
+</section>
+<div class="proof callout spaced-block" data-proof-id="p4-proof-diag">
+<div class="proof-head"><strong>Capture obligatoire :</strong> montrez dans <strong>l’Explorateur Windows</strong> le rapport <strong>diagnostic_vm.txt</strong> avec au moins la configuration IP, le test loopback, la résolution DNS de localhost et une liste de ports en écoute.</div>
+<div class="proof-body" tabindex="0" title="Cliquez ici puis collez une image depuis le presse-papiers avec Ctrl+V">
+<div class="proofEmpty"><button class="btnCapture proofInsertLink" type="button">Insérer</button> ici la capture demandée.<div class="proofPasteHint">ou collez une image enregistrée dans le presse-papiers avec Ctrl+V.</div></div>
+<img alt="Capture de l’étudiant" class="proofImg"/>
+<input accept="image/*" class="proofFile" hidden="" type="file"/>
+<div class="proofBodyActions"><button class="btnClear proofRemoveLink" type="button">retirer la capture</button></div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</section>
+<section class="part" id="partie-5">
+<div class="part-header"><h2 class="part-title">Partie 5 — Tâches de recherche (20 %)</h2></div>
+<div class="part-body"><div class="callout spaced-block"><strong>Barème :</strong> cette partie représente <strong>20 % de la note</strong>.</div>
+<section class="section-block line-section">
+<h3 class="section-title" id="p5-s1">Consignes générales du bloc autonome</h3>
+<div class="section-body">
+<p>Dans cette partie, vous devez retrouver et appliquer la bonne méthode à partir des notions déjà pratiquées en classe. Les tâches demandées reprennent des manipulations déjà réalisables sur la machine virtuelle du labo.</p>
+<div class="callout spaced-block"><strong>Règle :</strong> les solutions attendues doivent rester réalisables, sûres et cohérentes avec les manipulations déjà pratiquées en classe.</div>
+</div>
+</section>
+<section class="section-block line-section">
+<h3 class="section-title" id="p5-s2">Mini-défis à réaliser</h3>
+<div class="section-body">
+<section class="subsection-block">
+<h4 class="subsection-title">Tâche autonome 1 — rechercher les doublons avec Get-FileHash</h4>
+<div class="subsection-body">
+<ul>
+<li>Créer <code>scripts\recherche_doublons.ps1</code>.</li>
+<li>Le script doit analyser le dossier <code>photos</code> du labo.</li>
+<li>Il doit produire un fichier <code>rapport\doublons.txt</code> où l’on voit clairement quels fichiers ont le même hash.</li>
+<li>Utiliser <code>-WhatIf</code> seulement si vous voulez simuler une suppression, mais aucune suppression n’est obligatoire ici.</li>
+</ul>
+<div class="callout spaced-block"><strong>Indices autorisés :</strong><ul><li><code>Get-ChildItem "photos" -File -Recurse</code></li><li><code>Get-FileHash</code></li><li><code>Group-Object Hash</code></li><li><code>Where-Object { $_.Count -gt 1 }</code></li><li><code>Out-String</code> + <code>Set-Content</code></li></ul></div>
+</div>
+</section>
+<section class="subsection-block">
+<h4 class="subsection-title">Tâche autonome 2 — ranger automatiquement les fichiers par type</h4>
+<div class="subsection-body">
+<ul>
+<li>Créer <code>scripts\rangement_par_type.ps1</code>.</li>
+<li>Le script doit traiter le dossier <code>downloads_test</code>.</li>
+<li>Il doit créer des sous-dossiers cohérents, puis y déplacer les fichiers selon leur extension.</li>
+<li>À la fin, le dossier <code>downloads_test</code> doit clairement montrer le rangement effectué.</li>
+</ul>
+<div class="callout spaced-block"><strong>Indices autorisés :</strong><ul><li><code>$TargetFolder</code></li><li><code>Get-ChildItem -File</code></li><li><code>switch ($file.Extension.ToLower())</code></li><li><code>New-Item -ItemType Directory</code></li><li><code>Move-Item</code></li></ul></div>
+</div>
+</section>
+<section class="subsection-block">
+<h4 class="subsection-title">Tâche autonome 3 — créer deux lanceurs batch</h4>
+<div class="subsection-body">
+<ul>
+<li>Créer <code>lancer_creation.bat</code> pour lancer le script de création des utilisateurs.</li>
+<li>Créer <code>lancer_diagnostic.bat</code> pour lancer le script de diagnostic local.</li>
+<li>Les deux fichiers doivent fonctionner même si le dossier du labo est déplacé.</li>
+</ul>
+<div class="callout spaced-block"><strong>Indices autorisés :</strong><ul><li><code>powershell -ExecutionPolicy Bypass -File</code></li><li><code>%~dp0</code></li><li><code>pause</code></li></ul></div>
+</div>
+</section>
+<section class="subsection-block">
+<h4 class="subsection-title">Tâche autonome 4 — préparer le dossier d’archives de remise</h4>
+<div class="subsection-body">
+<ul>
+<li>Créer un sous-dossier de remise dans <code>archives</code> avec un nom explicite et horodaté.</li>
+<li>Copier dans ce dossier au minimum : <code>README_TECHNIQUE.md</code>, <code>diagnostic_vm.txt</code>, <code>doublons.txt</code> et les fichiers de log utiles.</li>
+<li>Le résultat doit être facile à corriger et à relire.</li>
+</ul>
+<div class="callout spaced-block"><strong>Indices autorisés :</strong><ul><li><code>New-Item</code></li><li><code>Join-Path</code></li><li><code>Get-Date -Format yyyyMMdd-HHmm</code></li><li><code>Copy-Item</code></li><li><code>Get-ChildItem</code></li></ul></div>
+</div>
+</section>
+<div class="proof callout spaced-block" data-proof-id="p5-proof-auto">
+<div class="proof-head">
+<div><strong>Capture obligatoire :</strong> montrez au moins un rapport de doublons, le rangement final de <strong>downloads_test</strong>, l’exécution d’un fichier batch avec <strong>%~dp0</strong> et un dossier de remise présent dans <strong>archives</strong>.</div>
+</div>
+<div class="proof-body" tabindex="0" title="Cliquez ici puis collez une image depuis le presse-papiers avec Ctrl+V">
+<div class="proofEmpty"><button class="btnCapture proofInsertLink" type="button">Insérer</button> ici la capture demandée.<div class="proofPasteHint">ou collez une image enregistrée dans le presse-papiers avec Ctrl+V.</div></div>
+<img alt="Capture de l’étudiant" class="proofImg"/>
+<input accept="image/*" class="proofFile" hidden="" type="file"/>
+<div class="proofBodyActions"><button class="btnClear proofRemoveLink" type="button">retirer la capture</button></div>
+</div>
+</div>
+<div class="callout spaced-block"><strong>À saisir :</strong> Parmi vos tâches autonomes, laquelle vous a demandé le plus de réflexion et pourquoi ?
+ <div class="answer-area"><textarea class="team-input answerbox-large" id="p5_answer_auto" placeholder="Écris ici ta réponse..."></textarea></div>
+</div>
+</div>
+</section>
+</div>
+</section>
+<section class="part" id="partie-6">
+<div class="part-header"><h2 class="part-title">Partie 6 — Documentation et bilan (10 %)</h2></div>
+<div class="part-body"><div class="callout spaced-block"><strong>Barème :</strong> cette partie représente <strong>10 % de la note</strong>.</div>
+<section class="section-block line-section">
+<h3 class="section-title" id="p6-s1">Compléter le README technique</h3>
+<div class="section-body">
+<p>Complétez réellement le fichier <code>README_TECHNIQUE.md</code>. Il doit être court, clair et exploitable. Il ne doit pas répéter mécaniquement les consignes du labo.</p>
+<div class="callout spaced-block"><strong>Minimum attendu :</strong> structure du dossier, rôle des scripts guidés, rôle des scripts autonomes, tests effectués, deux problèmes rencontrés ou plausibles, rôle de <code>%~dp0</code> et deux bonnes pratiques de sécurité.</div>
+<div class="proof callout spaced-block" data-proof-id="p6-proof-doc">
+<div class="proof-head">
+<div><strong>Capture obligatoire :</strong> montrez le README technique complété avec plusieurs sections rédigées, ainsi qu’au moins une bonne pratique de sécurité correctement formulée.</div>
+</div>
+<div class="proof-body" tabindex="0" title="Cliquez ici puis collez une image depuis le presse-papiers avec Ctrl+V">
+<div class="proofEmpty"><button class="btnCapture proofInsertLink" type="button">Insérer</button> ici la capture demandée.<div class="proofPasteHint">ou collez une image enregistrée dans le presse-papiers avec Ctrl+V.</div></div>
+<img alt="Capture de l’étudiant" class="proofImg"/>
+<input accept="image/*" class="proofFile" hidden="" type="file"/>
+<div class="proofBodyActions"><button class="btnClear proofRemoveLink" type="button">retirer la capture</button></div>
+</div>
+</div>
+</div>
+</section>
+<section class="section-block line-section">
+<h3 class="section-title" id="p6-s2">Mini-recherche</h3>
+<div class="section-body">
+<div class="callout spaced-block"><strong>À saisir :</strong> Citez une bonne pratique avant d’exécuter un fichier <code>.bat</code> inconnu et expliquez-la en une ou deux phrases.
+ <div class="answer-area"><textarea class="team-input answerbox-large" id="p6_answer_security" placeholder="Écris ici ta réponse..."></textarea></div>
+</div>
+<div class="callout spaced-block"><strong>À saisir :</strong> Citez une bonne pratique pour éviter qu’un mot de passe temporaire de labo devienne un risque de sécurité réel.
+ <div class="answer-area"><textarea class="team-input answerbox-large" id="p6_answer_password" placeholder="Écris ici ta réponse..."></textarea></div>
+</div>
+</div>
+</section>
+<section class="section-block line-section">
+<h3 class="section-title" id="p6-s3">Bilan final</h3>
+<div class="section-body">
+<div class="table-wrap">
+<table>
+<thead><tr><th>Élément à vérifier</th><th>Preuve attendue</th><th>Case</th></tr></thead>
+<tbody>
+<tr><td>Structure du dossier du labo</td><td>Dossier racine et sous-dossiers créés</td><td class="check-cell"><input aria-label="Structure du labo" class="capture-check" data-proof-target="p1-proof-setup" type="checkbox"/></td></tr>
+<tr><td>CSV du labo</td><td>utilisateurs.csv exact et lisible</td><td class="check-cell"><input aria-label="CSV du labo" class="capture-check" data-proof-target="p2-proof-csv" type="checkbox"/></td></tr>
+<tr><td>Création locale des comptes — terminal</td><td>Exécution du script dans PowerShell</td><td class="check-cell"><input aria-label="Création locale" class="capture-check" data-proof-target="p3-proof-users-terminal" type="checkbox"/></td></tr><tr><td>Création locale des comptes — journal</td><td>Fichier creation_utilisateurs.log bien rempli</td><td class="check-cell"><input aria-label="Journal création utilisateurs" class="capture-check" data-proof-target="p3-proof-users-log" type="checkbox"/></td></tr>
+<tr><td>Automatisation observable</td><td>Script en cours d’exécution + fichiers rangés</td><td class="check-cell"><input aria-label="Automatisation observable" class="capture-check" data-proof-target="p4-proof-live" type="checkbox"/></td></tr>
+<tr><td>Diagnostic local</td><td>Rapport visible dans l’Explorateur Windows</td><td class="check-cell"><input aria-label="Diagnostic local" class="capture-check" data-proof-target="p4-proof-diag" type="checkbox"/></td></tr>
+<tr><td>Tâches de recherche</td><td>Doublons + tri + batch + archives</td><td class="check-cell"><input aria-label="Bloc autonome" class="capture-check" data-proof-target="p5-proof-auto" type="checkbox"/></td></tr>
+<tr><td>Documentation finale</td><td>README technique complété</td><td class="check-cell"><input aria-label="Documentation finale" class="capture-check" data-proof-target="p6-proof-doc" type="checkbox"/></td></tr>
+</tbody>
+</table>
+</div>
+<div class="callout spaced-block"><strong>Conseil :</strong> avant d’exporter, vérifiez que vos scripts, vos rapports, vos journaux et votre dossier d’archives sont réellement présents dans la structure du labo.</div>
+</div>
+</section>
+</div>
+</section>
+<section class="part" id="partie-qcm">
+<div class="part-header"><h2 class="part-title">QCM de validation (10 %)</h2></div>
+<div class="part-body"><div class="callout spaced-block"><strong>Barème :</strong> cette partie représente <strong>10 % de la note</strong>.</div>
+<section class="section-block line-section">
+<h3 class="section-title">Répondez aux questions suivantes</h3>
+<div class="section-body">
+<div class="qcm-block">
+<p class="qcm-question">1. Pourquoi le test <code>Test-Connection 127.0.0.1 -Count 2</code> est-il adapté à ce labo ?</p>
+<div class="qcm-options">
+<label class="qcm-option"><input name="qcm1" type="radio" value="1"/><span><strong>A.</strong> Il permet de tester la pile réseau locale sans autre machine.</span></label>
+<label class="qcm-option"><input name="qcm1" type="radio" value="2"/><span><strong>B.</strong> Il désactive le pare-feu Windows.</span></label>
+<label class="qcm-option"><input name="qcm1" type="radio" value="3"/><span><strong>C.</strong> Il crée automatiquement une nouvelle adresse IP.</span></label>
+<label class="qcm-option"><input name="qcm1" type="radio" value="4"/><span><strong>D.</strong> Il installe un pilote réseau.</span></label>
+</div>
+</div>
+<div class="qcm-block">
+<p class="qcm-question">2. Quel est le rôle principal du fichier <code>utilisateurs.csv</code> dans ce labo ?</p>
+<div class="qcm-options">
+<label class="qcm-option"><input name="qcm2" type="radio" value="1"/><span><strong>A.</strong> Stocker des captures d’écran.</span></label>
+<label class="qcm-option"><input name="qcm2" type="radio" value="2"/><span><strong>B.</strong> Servir de source de données pour les comptes et les groupes locaux.</span></label>
+<label class="qcm-option"><input name="qcm2" type="radio" value="3"/><span><strong>C.</strong> Remplacer le fichier README.</span></label>
+<label class="qcm-option"><input name="qcm2" type="radio" value="4"/><span><strong>D.</strong> Supprimer automatiquement des utilisateurs.</span></label>
+</div>
+</div>
+<div class="qcm-block">
+<p class="qcm-question">3. À quoi sert principalement <code>%~dp0</code> dans un fichier batch ?</p>
+<div class="qcm-options">
+<label class="qcm-option"><input name="qcm3" type="radio" value="1"/><span><strong>A.</strong> À pointer vers le dossier du fichier <code>.bat</code>.</span></label>
+<label class="qcm-option"><input name="qcm3" type="radio" value="2"/><span><strong>B.</strong> À chiffrer un mot de passe.</span></label>
+<label class="qcm-option"><input name="qcm3" type="radio" value="3"/><span><strong>C.</strong> À supprimer les fichiers temporaires.</span></label>
+<label class="qcm-option"><input name="qcm3" type="radio" value="4"/><span><strong>D.</strong> À lister les ports en écoute.</span></label>
+</div>
+</div>
+<div class="qcm-block">
+<p class="qcm-question">4. Quelle commande est la plus utile pour repérer des fichiers identiques par leur contenu réel ?</p>
+<div class="qcm-options">
+<label class="qcm-option"><input name="qcm4" type="radio" value="1"/><span><strong>A.</strong> <code>Get-FileHash</code></span></label>
+<label class="qcm-option"><input name="qcm4" type="radio" value="2"/><span><strong>B.</strong> <code>Resolve-DnsName</code></span></label>
+<label class="qcm-option"><input name="qcm4" type="radio" value="3"/><span><strong>C.</strong> <code>Get-Acl</code></span></label>
+<label class="qcm-option"><input name="qcm4" type="radio" value="4"/><span><strong>D.</strong> <code>Get-NetAdapter</code></span></label>
+</div>
+</div>
+<div class="qcm-block">
+<p class="qcm-question">5. Quelle bonne pratique est correcte devant un fichier <code>.bat</code> inconnu ?</p>
+<div class="qcm-options">
+<label class="qcm-option"><input name="qcm5" type="radio" value="1"/><span><strong>A.</strong> Le lancer directement en administrateur.</span></label>
+<label class="qcm-option"><input name="qcm5" type="radio" value="2"/><span><strong>B.</strong> L’inspecter d’abord et le tester sur un environnement isolé.</span></label>
+<label class="qcm-option"><input name="qcm5" type="radio" value="3"/><span><strong>C.</strong> Le renommer en <code>.ps1</code> pour le sécuriser.</span></label>
+<label class="qcm-option"><input name="qcm5" type="radio" value="4"/><span><strong>D.</strong> Le copier dans <code>C:\Windows</code>.</span></label>
+</div>
+</div>
+</div>
+</section>
+</div>
+</section>
+<section class="card compact-eval-card" id="grille-evaluation">
+<h2>Grille d’évaluation</h2>
+<div class="callout spaced-block"><strong>Important :</strong> cette section présente la <strong>grille d’évaluation</strong> utilisée pour la correction. <strong>L’étudiant n’a rien à remplir ici.</strong></div>
+
+<div class="table-wrap compact-eval-wrap"><table class="compact-eval-table"><thead><tr><th>Compétence</th><th>Critère</th><th>Ce qui est évalué</th><th>Échelle</th><th>/max</th></tr></thead><tbody><tr><td>1. Préparer les outils</td><td><code>1.1</code></td><td>Analyse de l’environnement de travail et du besoin</td><td>0 / 1 / 3 / 4 / 5</td><td><strong>5</strong></td></tr><tr><td>1. Préparer les outils</td><td><code>1.2</code></td><td>Choix judicieux des outils, fichiers et commandes</td><td>0 / 1 / 3 / 4 / 5</td><td><strong>5</strong></td></tr><tr><td>1. Préparer les outils</td><td><code>1.3</code></td><td>Préparation correcte du dossier, de la structure et des fichiers de départ</td><td>0 / 1 / 3 / 4 / 5</td><td><strong>5</strong></td></tr><tr><td>2. Traduire la tâche</td><td><code>2.1</code></td><td>Rédaction correcte des scripts, commandes et fichiers batch</td><td>0 / 3 / 6 / 9 / 12</td><td><strong>12</strong></td></tr><tr><td>2. Traduire la tâche</td><td><code>2.2</code></td><td>Respect de la méthode d’automatisation et enchaînement logique</td><td>0 / 3 / 6 / 10 / 13</td><td><strong>13</strong></td></tr><tr><td>3. Effectuer des tests</td><td><code>3.1</code></td><td>Planification des essais demandés et méthode de vérification</td><td>0 / 1 / 3 / 5 / 6</td><td><strong>6</strong></td></tr><tr><td>3. Effectuer des tests</td><td><code>3.2</code></td><td>Application rigoureuse des essais, captures et validations</td><td>0 / 1 / 3 / 5 / 6</td><td><strong>6</strong></td></tr><tr><td>3. Effectuer des tests</td><td><code>3.3</code></td><td>Fonctionnement correct des scripts, journaux et résultats observés</td><td>0 / 2 / 4 / 6 / 8</td><td><strong>8</strong></td></tr><tr><td>4. Procéder à l’automatisation</td><td><code>4.1</code></td><td>Exécution correcte des scripts ou configurations</td><td>0 / 3 / 6 / 10 / 13</td><td><strong>13</strong></td></tr><tr><td>4. Procéder à l’automatisation</td><td><code>4.2</code></td><td>Efficience des tâches automatisées et qualité des résultats</td><td>0 / 4 / 8 / 12 / 17</td><td><strong>17</strong></td></tr><tr><td>5. Rédiger la documentation</td><td><code>5.1</code></td><td>Choix pertinent de l’information à rédiger</td><td>0 / 1 / 3 / 5 / 6</td><td><strong>6</strong></td></tr><tr><td>5. Rédiger la documentation</td><td><code>5.2</code></td><td>Notation claire du travail, réponses et lisibilité des traces</td><td>0 / 1 / 2 / 3 / 4</td><td><strong>4</strong></td></tr><tr class="compact-eval-total"><td><strong>Total</strong></td><td colspan="3"><strong>Barème global :</strong> parties 1 à 4 = 60 %, partie 5 = 20 %, partie 6 = 10 %, QCM = 10 %.</td><td><strong>100</strong></td></tr></tbody></table></div></section><section class="card" id="export">
+<h2>Exportation en PDF</h2>
+<p>Complétez d’abord les noms d’équipe, les captures et les réponses rédigées. Ensuite, utilisez le bouton ci-dessous pour imprimer ou exporter votre labo en PDF.</p>
+<div aria-label="Export" class="exportbar exportbar-spaced render-export">
+<button class="actionbtn" id="exportPdf" type="button">Exporter en PDF</button>
+</div>
+</section>
+<footer class="course-footer">
+<div class="course-footer-left">Version 2026 — labo sur une seule VM — version sûre</div>
+<div class="course-footer-right"><a class="footer-author-link" href="./droits.html">© Anis Ghaieb</a> — Tous droits réservés</div>
+</footer>
+</main>
+<div aria-hidden="true" class="export-confirm-overlay" hidden="" id="exportConfirmOverlay">
+<div aria-labelledby="exportConfirmTitle" aria-modal="true" class="export-confirm-dialog" role="dialog">
+<h2 id="exportConfirmTitle">Captures manquantes</h2>
+<p id="exportConfirmMessage">Il manque encore des captures obligatoires.</p>
+<div class="export-confirm-actions">
+<button id="exportContinue" type="button">Poursuivre l’export</button>
+<button id="exportCancel" type="button">Retourner au labo</button>
+</div>
+</div>
+</div>
+</body>
+</html>
